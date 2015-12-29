@@ -29,7 +29,8 @@
     }
 
     function getMod10Checksum(number) {
-      return 10 - mod10(number);
+      var total = mod10(number);
+      return (10 - total === 10) ? 0 : 10 - total;
     }
 
     function isMod10(number) {

@@ -230,5 +230,8 @@ describe("Personnummer", function () {
         it("should default numbers", function () {
             expect(Personnummer.generate(toDate(1964, 8, 23)).toString()).toEqual('640823-0008');
         });
+        it("should generate personnummer even when checksum is zero", function () {
+            expect(Personnummer.generate(toDate(1997, 7, 15)).toString()).toEqual('970715-0000');
+        });
     });
 });
