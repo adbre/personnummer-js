@@ -25,7 +25,15 @@
             }
         }
 
-        return total % 10 === 0;
+        return total % 10;
+    }
+
+    function getMod10Checksum(number) {
+      return 10 - mod10(number);
+    }
+
+    function isMod10(number) {
+      return mod10(number) === 0;
     }
 
     function tryParse(data) {
@@ -45,7 +53,7 @@
         this.number = match[7];
         this.checksum = match[8];
 
-        if (!mod10([this.year, this.month, this.day, this.number, this.checksum].join(""))) {
+        if (!isMod10([this.year, this.month, this.day, this.number, this.checksum].join(""))) {
             return false;
         }
 
@@ -204,6 +212,25 @@
 
     Personnummer.getAge = function (data, now) {
         return (new Personnummer(data)).getAge(now);
+    };
+
+    Personnummer.generate = function (dateOfBirth, numbers) {
+        function padLeft(s, padWidth, padCharacter) {
+          s = s + '';
+          return s.length >= padWidth ? s : new Array(padWidth - s.length + 1).join(padCharacter || '0') + s;
+        }
+
+        if (!numbers) {
+          numbers = "000";
+        }
+
+        var data;        
+        data = dateOfBirth.getFullYear().toString().substr(-2);
+        data += padLeft(dateOfBirth.getMonth() + 1, 2);
+        data += padLeft(dateOfBirth.getDate(), 2);
+        data += numbers;
+
+        return Personnummer.tryParse(data + getMod10Checksum(data));
     };
 
     Personnummer.mockDate = function (date) {

@@ -222,4 +222,13 @@ describe("Personnummer", function () {
             expect((new Personnummer("100623-8362")).getAge(toDate(2016, 6, 23))).toEqual(6);
         });
     });
+
+    describe("generate", function () {
+        it("should generate personnummer given date of birth", function () {
+            expect(Personnummer.generate(toDate(1964, 8, 23), 323).toString()).toEqual('640823-3234');
+        });
+        it("should default numbers", function () {
+            expect(Personnummer.generate(toDate(1964, 8, 23)).toString()).toEqual('640823-0008');
+        });
+    });
 });
