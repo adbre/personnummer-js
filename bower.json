@@ -1,0 +1,20 @@
+{
+  "name": "personnummer-js",
+  "description": "",
+  "main": "Personnummer.js",
+  "authors": [
+    "Adam Brengesjö"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/adbre/personnummer-js",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

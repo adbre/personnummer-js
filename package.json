@@ -1,8 +1,8 @@
 {
-  "name": "personnummer",
+  "name": "personnummer-js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Personnummer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
