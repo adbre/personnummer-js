@@ -49,6 +49,10 @@
             return false;
         }
 
+        if (!this.separator) {
+          this.separator = this.getAge() >= 100 ? '+' : '-';
+        }
+
         return true;
     }
 

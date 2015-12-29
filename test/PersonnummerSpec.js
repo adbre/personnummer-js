@@ -7,6 +7,10 @@ function toDate(year, month, day) {
 }
 
 describe("Personnummer", function () {
+    beforeEach(function () {
+      Personnummer.mockDate(toDate(2015, 12, 29));
+    });
+
     it("Should validate a personnummer", function () {
         expect(Personnummer.isValid("640823-3234")).toBe(true);
     });
@@ -79,6 +83,13 @@ describe("Personnummer", function () {
             expect(personnummer.number).toEqual("323");
             expect(personnummer.checksum).toEqual("1");
         });
+        it("Should add '-' separator", function () {
+            expect(Personnummer.parse("6408233234").separator).toEqual("-");
+        });
+        it("Should add '+' separator", function () {
+            Personnummer.mockDate(toDate(2064, 8, 23));
+            expect(Personnummer.parse("6408233234").separator).toEqual("+");
+        });
         it("Should throw on invalid personnummer", function () {
             expect(function () {
                 Personnummer.parse("640883-323");
@@ -140,6 +151,9 @@ describe("Personnummer", function () {
     describe("toTraditionalString", function () {
         it("should return a traditional formatted personnummer", function () {
             expect((new Personnummer("19640883-3231")).toTraditionalString()).toEqual("640883-3231");
+        });
+        it("should return with separator", function () {
+            expect((new Personnummer("6408833231")).toTraditionalString()).toEqual("640883-3231");
         });
     });
 
